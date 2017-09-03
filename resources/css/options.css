@@ -1,0 +1,16 @@
+body {
+    width: 850px;
+}
+
+.address_input {
+    width: 300px;
+}
+
+.token_input {
+    width: 325px;
+}
+
+.address_options > thead > tr > th {
+    font-weight: normal;
+    text-align: left;
+}

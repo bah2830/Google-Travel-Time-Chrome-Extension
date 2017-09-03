@@ -2,22 +2,44 @@
 <html>
     <head>
         <title>Options</title>
-        <link rel="stylesheet" type="text/css" href="../css/options.css">
+        <link rel="stylesheet" type="text/css" href="../resources/css/options.css">
     </head>
 
     <body>
-        Google API Token: <input id="api_token" type="text" class="token_input">
+        <h3>Google Settings</h3>
+        Google API Token: &nbsp; &nbsp; <input id="api_token" type="text" class="token_input">
         <br><br>
 
-        Start Address: <input id="address_start" type="text" class="address_input">
-        <br>
-
-        End Address: <input id="address_end" type="text" class="address_input">
+        <h3>Travel Times</h3>
+        <table class="address_options">
+            <thead>
+                <tr>
+                    <th width="200px">Name</th>
+                    <th width="350px">Start</th>
+                    <th>End</th>
+                    <th width="25px">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="address_row_0" class="address_row">
+                    <td><input id="address_name_0" type="text" class="name_input"></td>
+                    <td><input id="address_start_0" type="text" class="address_input"></td>
+                    <td><input id="address_end_0" type="text" class="address_input"></td>
+                    <td align="right">
+                        <span id="delete_address_0"><img src="../resources/img/delete.png" height="15px"></span>
+                    </td>
+                </tr>
+                <tr id="add_address_row">
+                    <td colspan="3"><a id="add_address_link" href="#">Add more</a></td>
+                </tr>
+            </tbody>
+        </table>
         <br><br>
 
         <div id="status"></div>
         <button id="save">Save</button>
 
-        <script src="../js/options.js"></script>
+        <script src="../resources/js/jquery-3.2.1.min.js"></script>
+        <script src="../resources/js/options.js"></script>
     </body>
 </html>

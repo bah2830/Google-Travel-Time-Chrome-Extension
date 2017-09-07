@@ -43,39 +43,33 @@ var getBadgeBackgroundColor = function(duration) {
 
 // Make API call to get traffic times
 var checkTravelTimes = function() {
-    var origins = '';
-    var destinations = '';
     $.each(addresses, function(i, address) {
-        if (i == 0) {
-            origins = address.start;
-            destinations = address.end;
-        } else {
-            origins += "|" + address.start;
-            destinations += "|" + address.end;
-        }
-    });
-
-    var url = baseURL + '&origins=' + origins + '&destinations=' + destinations + '&key=' + apiToken;
-
-    $.getJSON(url, function(data) {
-        $.each(addresses, function(i, address) {
-            durationResults[address.name] = {
-                normal: {
-                    text: data.rows[i].elements[i].duration.text,
-                    minutes: Math.round(data.rows[i].elements[i].duration.value/ 60),
+        var url = baseURL + '&origins=' + address.start + '&destinations=' + address.end + '&key=' + apiToken;
+        $.getJSON(url, function(data) {
+            if (data.rows[0] != null) {
+                durationResults[address.name] = {
+                    normal: {
+                        text: data.rows[0].elements[0].duration.text,
+                        minutes: Math.round(data.rows[0].elements[0].duration.value/ 60),
+                    }
                 }
-            }
 
-            if (data.rows[i].elements[i].duration_in_traffic != undefined) {
-                durationResults[address.name]["traffic"] = {
-                    text: data.rows[i].elements[i].duration.text,
-                    minutes: Math.round(data.rows[i].elements[i].duration.value/ 60),
+                if (data.rows[0].elements[0].duration_in_traffic != undefined) {
+                    durationResults[address.name]["traffic"] = {
+                        text: data.rows[0].elements[0].duration.text,
+                        minutes: Math.round(data.rows[0].elements[0].duration.value/ 60),
+                    }
+                } else {
+                    durationResults[address.name]["traffic"] = durationResults[address.name]["normal"];
                 }
             } else {
-                durationResults[address.name]["traffic"] = durationResults[address.name]["normal"];
+                durationResults[address.name] = {
+                    normal: { text: "N/A", minutes: "N/A" },
+                    traffic: { text: "N/A", minutes: "N/A" },
+                }
             }
 
-            if (i == 0) {
+            if (i == 0 && durationResults[address.name].traffic.minutes != "N/A") {
                 chrome.browserAction.setBadgeBackgroundColor({ color: getBadgeBackgroundColor(durationResults[address.name]) });
                 chrome.browserAction.setBadgeText({text: String(durationResults[address.name].traffic.minutes)});
             }

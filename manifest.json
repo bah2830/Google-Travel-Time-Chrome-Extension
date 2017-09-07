@@ -3,7 +3,7 @@
 
     "name": "Travel Time",
     "description": "Travel time estimator using google distance matrix",
-    "version": "0.1.2",
+    "version": "0.1.3",
 
     "icons": {
         "16": "resources/img/icons/icon16.png",

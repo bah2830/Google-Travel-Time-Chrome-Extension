@@ -56,8 +56,8 @@ var checkTravelTimes = function() {
 
                 if (data.rows[0].elements[0].duration_in_traffic != undefined) {
                     durationResults[address.name]["traffic"] = {
-                        text: data.rows[0].elements[0].duration.text,
-                        minutes: Math.round(data.rows[0].elements[0].duration.value/ 60),
+                        text: data.rows[0].elements[0].duration_in_traffic.text,
+                        minutes: Math.round(data.rows[0].elements[0].duration_in_traffic.value/ 60),
                     }
                 } else {
                     durationResults[address.name]["traffic"] = durationResults[address.name]["normal"];

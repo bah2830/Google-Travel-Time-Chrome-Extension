@@ -28,12 +28,12 @@ var getBadgeBackgroundColor = function(duration) {
     }
 
     // Bad traffic. Red
-    if (percentFromNormal >= 200) {
+    if (percentFromNormal >= 150) {
         return [100, 0, 0, 255];
     }
 
     // Getting Bad. Orange
-    if (percentFromNormal >= 150) {
+    if (percentFromNormal >= 125) {
         return [230, 138, 0, 255];
     }
 
